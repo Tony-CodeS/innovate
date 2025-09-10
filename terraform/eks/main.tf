@@ -7,8 +7,8 @@ module "eks" {
   vpc_id          = var.vpc_id
   subnet_ids      = var.private_subnets
 
-  # Attach the pre-created cluster role
-  cluster_iam_role_name = basename(var.cluster_role_arn)
+  # Use the IAM role you already created for the EKS cluster
+  iam_role_arn = var.cluster_role_arn
 
   eks_managed_node_groups = {
     default = {
@@ -17,7 +17,7 @@ module "eks" {
       min_size       = 1
       instance_types = ["t3.medium"]
 
-      # Attach the pre-created node role
+      # Node role you created earlier
       iam_role_arn = var.node_role_arn
     }
   }
