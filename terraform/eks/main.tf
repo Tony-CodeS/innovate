@@ -1,18 +1,3 @@
-terraform {
-  required_version = ">= 1.3.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
@@ -23,9 +8,11 @@ module "eks" {
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnets
 
-  # IAM roles you already created
-  cluster_role_arn = var.cluster_role_arn
-  node_role_arn    = var.node_role_arn
+  # Tell the module not to create new IAM roles
+  create_iam_role = false
+
+  # Use the IAM role you created for the cluster
+  iam_role_arn = var.cluster_role_arn
 
   eks_managed_node_groups = {
     default = {
@@ -33,6 +20,10 @@ module "eks" {
       max_size       = 3
       min_size       = 1
       instance_types = ["t3.medium"]
+
+      # Also tell node group not to create a new role
+      create_iam_role = false
+      iam_role_arn    = var.node_role_arn
     }
   }
 
