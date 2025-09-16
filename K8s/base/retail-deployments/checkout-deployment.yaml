@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catalog
+  name: checkout
   namespace: retail
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: catalog
+      app: checkout
   template:
     metadata:
       labels:
-        app: catalog
+        app: checkout
     spec:
       containers:
-        - name: catalog
-          image: public.ecr.aws/aws-containers/retail-store-sample-catalog:1.2.4
+        - name: checkout
+          image: public.ecr.aws/aws-containers/retail-store-sample-checkout:1.2.4
           ports:
             - containerPort: 8080
 

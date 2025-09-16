@@ -1,0 +1,39 @@
+# Terraform files
+**/.terraform/*
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/terraform.tfstate.*.backup
+**/terraform.tfvars
+**/*.tfplan
+**/.terraformrc
+**/terraform.auto.tfvars
+
+# AWS CLI
+.aws/
+aws-auth.yaml
+eks-assume-role.json
+
+# Kubernetes
+.kube/
+*.kubeconfig
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Python virtual environments
+venv/
+.env
